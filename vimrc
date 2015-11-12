@@ -3,8 +3,6 @@ silent execute '!mkdir -p ~/.vim/tmp'
 
 source $HOME/.vim/vundle.config
 
-set nobackup
-
 set mouse=a
 
 set backupdir=~/.vim/tmp//
@@ -25,9 +23,6 @@ nnoremap <CR> :noh<CR><CR>
 set splitright
 set splitbelow
 
-set showmatch matchtime=3
-set cursorline
-
 set number " show line numbers
 set ruler
 
@@ -42,13 +37,8 @@ set wildmenu
 
 syntax enable
 set background=dark
-set colorcolumn=85
 
-try
-    colorscheme solarized
-catch /^Vim\%((\a\+)\)\=:E185/
-    colorscheme desert
-endtry
+colorscheme desert
 
 set guifont=monaco:h12
 
@@ -61,13 +51,7 @@ endif
 " open quickfix automatically for :grep :make etc
 " autocmd QuickFixCmdPost * :cwindow 5
 
-" create Ag command and open results in cwindow
-command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-
 imap § <C-y>,
-
-" show/hide all whitespace chars
-nmap <silent> <leader>s :set nolist!<CR>
 
 " force syntax coloring of full file
 map <leader>c :syntax sync fromstart<CR>
@@ -144,8 +128,30 @@ silent! set clipboard=unnamed
 silent! set clipboard=unnamedplus
 
 " load other stuff
-" TODO put mah macros here
-silent! source ~/CloudPT/configs/vimmacros.vim
+"command line mode with double space!"
+let mapleader=" "
+noremap <leader><space> :
+
+inoremap jj <Esc>:
+noremap ,l <Esc>:JSHint<CR>
+nnoremap ,s :AutoSaveToggle<CR>
+
+inoremap $$ [].slice.call(arguments)
+
+inoremap << <leader>{<CR>}<Up><End><Cr>
+
+inoremap <forin <Esc>^"tc$for (var k in <Esc>"tpa) if (<Esc>"tpa.hasOwnProperty(k)) {<CR>}<Up><End><Cr>
+inoremap <foreach <Esc>^"tc$for (var i = 0; i < <Esc>"tpa.length; i++) {<Cr>}<Up><End><Cr>
+inoremap <if <Esc>^"tc$if (typeof <Esc>"tpa !== 'undefined') {<Cr>}<Up><End><Cr>
+inoremap <require <Esc>^"tc$var <Esc>"tpa = require('<Esc>"tpa')
+
+
+
+inoremap <func function () {}<Esc>T(i
+
+" navigation
+nnoremap ,h <esc>:tabprev<cr>
+nnoremap ,l <esc>:tabnext<cr>
 
 silent! set wildignorecase
 
