@@ -42,12 +42,6 @@ colorscheme desert
 
 set guifont=monaco:h12
 
-" The Silver Searcher
-if executable('ag')
-    " Use ag over grep
-    set grepprg=ag\ --nogroup\ --nocolor
-endif
-
 " open quickfix automatically for :grep :make etc
 " autocmd QuickFixCmdPost * :cwindow 5
 
