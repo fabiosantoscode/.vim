@@ -2,5 +2,6 @@
 .netrwhist
 *.swp
 tmp/*
+tmp
 .VimballRecord
 bundle/*

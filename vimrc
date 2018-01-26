@@ -5,8 +5,8 @@ source $HOME/.vim/vundle.config
 
 set mouse=a
 
-set backupdir=~/.vim/tmp//
-set directory=~/.vim/tmp//
+set backupdir=~/.vim/tmp/
+set directory=~/.vim/tmp/
 
 set enc=utf-8
 set fileformat=unix
