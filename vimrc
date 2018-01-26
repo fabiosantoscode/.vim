@@ -62,6 +62,7 @@ autocmd BufEnter * :syntax sync fromstart
 
 au BufRead,BufNewFile *.php set filetype=php.html
 au BufRead,BufNewFile *.ejs set filetype=html
+au BufRead,BufNewFile *.vue set filetype=html
 au BufRead,BufNewFile *.hbs set filetype=html
 au BufRead,BufNewFile *.coffee set filetype=coffee
 au BufRead,BufNewFile *.es6 set filetype=javascript
