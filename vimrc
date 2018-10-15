@@ -163,6 +163,9 @@ endfunction
 
 call DefaultColorScheme()
 
+" Pathogen
+execute pathogen#infect()
+
 " Don't let vimautosave change the updatetime, it fucks everything
 let g:auto_save_no_updatetime = 1
 
