@@ -166,6 +166,9 @@ call DefaultColorScheme()
 " Pathogen
 execute pathogen#infect()
 
+" disable Tsuquiomi on javascript files
+autocmd BufNewFile,BufRead *.js let g:tsuquyomi_disable_quickfix = 1
+
 " Don't let vimautosave change the updatetime, it fucks everything
 let g:auto_save_no_updatetime = 1
 
