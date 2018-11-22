@@ -141,6 +141,7 @@ inoremap <forin <Esc>^"tc$for (var k in <Esc>"tpa) if (<Esc>"tpa.hasOwnProperty(
 inoremap <foreach <Esc>^"tc$for (var i = 0; i < <Esc>"tpa.length; i++) {<Cr>}<Up><End><Cr>
 inoremap <if <Esc>^"tc$if (typeof <Esc>"tpa !== 'undefined') {<Cr>}<Up><End><Cr>
 inoremap <require <Esc>^"tc$const <Esc>"tpa = require('<Esc>"tpa')
+inoremap <import <Esc>^"tc$import <Esc>"tpa from '<Esc>"tpa'
 
 
 
