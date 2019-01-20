@@ -5,6 +5,11 @@ source $HOME/.vim/vundle.config
 
 set mouse=a
 
+" Resizing splits inside vim support (not for nvim)
+if !has('nvim')
+    set ttymouse=xterm
+endif
+
 set backupdir=~/.vim/tmp/
 set directory=~/.vim/tmp/
 
@@ -172,4 +177,13 @@ autocmd BufNewFile,BufRead *.js let g:tsuquyomi_disable_quickfix = 1
 
 " Don't let vimautosave change the updatetime, it fucks everything
 let g:auto_save_no_updatetime = 1
+
+" colors
+set termguicolors
+set t_ut=
+colorscheme desert
+
+" exit terminal with esc and massive scrollback
+:tnoremap <Esc> <C-\><C-n>
+set scrollback=99999
 
