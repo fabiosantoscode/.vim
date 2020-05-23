@@ -71,6 +71,8 @@ au BufRead,BufNewFile *.vue set filetype=html
 au BufRead,BufNewFile *.hbs set filetype=html
 au BufRead,BufNewFile *.coffee set filetype=coffee
 au BufRead,BufNewFile *.es6 set filetype=javascript
+au BufRead,BufNewFile *.tsx set filetype=typescript
+au BufRead,BufNewFile *.mdx set filetype=markdown
 
 " :h last-position-jump
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal!g`\"" | endif
@@ -142,8 +144,9 @@ inoremap $$ [].slice.call(arguments)
 
 inoremap << <leader>{<CR>}<Up><End><Cr>
 
-inoremap <forin <Esc>^"tc$for (var k in <Esc>"tpa) if (<Esc>"tpa.hasOwnProperty(k)) {<CR>}<Up><End><Cr>
-inoremap <foreach <Esc>^"tc$for (var i = 0; i < <Esc>"tpa.length; i++) {<Cr>}<Up><End><Cr>
+inoremap <forin <Esc>^"tc$for (const k in <Esc>"tpa) if (<Esc>"tpa.hasOwnProperty(k)) {<CR>}<Up><End><Cr>
+inoremap <forof <Esc>^"tc$for (const item of <Esc>"tpa) {<CR>}<Up><End><Cr>
+inoremap <foreach <Esc>^"tc$for (let i = 0; i < <Esc>"tpa.length; i++) {<Cr>}<Up><End><Cr>
 inoremap <if <Esc>^"tc$if (typeof <Esc>"tpa !== 'undefined') {<Cr>}<Up><End><Cr>
 inoremap <require <Esc>^"tc$const <Esc>"tpa = require('<Esc>"tpa')
 inoremap <import <Esc>^"tc$import <Esc>"tpa from '<Esc>"tpa'
@@ -186,4 +189,6 @@ colorscheme desert
 " exit terminal with esc and massive scrollback
 :tnoremap <Esc> <C-\><C-n>
 set scrollback=99999
+
+autocmd BufNewFile,BufRead * :set indentexpr=|set smartindent
 
