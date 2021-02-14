@@ -1,3 +1,6 @@
+" Enable filetype plugin
+:filetype plugin on
+
 " save backup files in another folder
 silent execute '!mkdir -p ~/.vim/tmp'
 
@@ -50,14 +53,13 @@ set guifont=monaco:h12
 " open quickfix automatically for :grep :make etc
 " autocmd QuickFixCmdPost * :cwindow 5
 
-imap § <C-y>,
-
 " force syntax coloring of full file
 map <leader>c :syntax sync fromstart<CR>
 
 " set spacing scheme for ruby and js files
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
+autocmd Filetype yaml setlocal ts=2 sts=2 sw=2
 
 " disable cursorline for ruby files (slows down vim... wtf)
 autocmd Filetype ruby set nocursorline
@@ -77,9 +79,6 @@ au BufRead,BufNewFile *.mdx set filetype=markdown
 " :h last-position-jump
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal!g`\"" | endif
 
-" for python files, avoid auto removal of identation in comments
-autocmd BufRead *.py inoremap # X<c-h>#<space>
-
 " highlight extra whitespace
 highlight ExtraWhitespace ctermbg=red guibg=red
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
@@ -94,9 +93,9 @@ autocmd Syntax * syn match ExtraWhitespace /\s\+$/
 
 
 
-
-
 " fabios custom part lel
+
+source /home/fabio/.vim/autoload/pathogen.vim
 
 " Stamp stuff
 set nocp
@@ -151,13 +150,9 @@ inoremap <if <Esc>^"tc$if (typeof <Esc>"tpa !== 'undefined') {<Cr>}<Up><End><Cr>
 inoremap <require <Esc>^"tc$const <Esc>"tpa = require('<Esc>"tpa')
 inoremap <import <Esc>^"tc$import <Esc>"tpa from '<Esc>"tpa'
 
-
-
-inoremap <func function () {}<Esc>T(i
-
-" navigation
-nnoremap ,h <esc>:tabprev<cr>
-nnoremap ,l <esc>:tabnext<cr>
+" Click to go to definition
+nnoremap v<LeftMouse> <Esc>:ALEGoToDefinition -vsplit<Cr>
+nnoremap s<LeftMouse> <Esc>:ALEGoToDefinition -split<Cr>
 
 silent! set wildignorecase
 
@@ -181,14 +176,28 @@ autocmd BufNewFile,BufRead *.js let g:tsuquyomi_disable_quickfix = 1
 " Don't let vimautosave change the updatetime, it fucks everything
 let g:auto_save_no_updatetime = 1
 
-" colors
+" Have suda.vim automatically sudo you so you can edit system files
+let g:suda_smart_edit = 1
+
+" Allow nicer colors
+if has("termguicolors")
 set termguicolors
-set t_ut=
-colorscheme desert
+endif
+
+" colors
+" https://github.com/NLKNguyen/papercolor-theme#installation
+set t_Co=256
+set background=light
+colorscheme PaperColor
+
 
 " exit terminal with esc and massive scrollback
 :tnoremap <Esc> <C-\><C-n>
 set scrollback=99999
 
-autocmd BufNewFile,BufRead * :set indentexpr=|set smartindent
+" Enable linters for rust
+let g:ale_linters = {'rust': ['analyzer'], 'typescript': ['tsserver'], 'python': ['mypy']}
+let g:ale_fixers = {'rust': ['rustfmt']}
+let g:ale_fix_on_save = 1
 
+autocmd BufNewFile,BufRead * :set indentexpr=|set smartindent
